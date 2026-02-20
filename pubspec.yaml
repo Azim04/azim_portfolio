@@ -1,0 +1,59 @@
+name: azim_portfolio
+description: Azim Shaikh — Flutter Developer Portfolio (mobile-app-style web)
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # Navigation
+  go_router: ^13.2.0
+
+  # State Management — Riverpod chosen for compile-safe providers,
+  # excellent async support (FutureProvider for GitHub API), and
+  # fine-grained rebuilds that keep 60fps on animation-heavy screens.
+  flutter_riverpod: ^2.5.1
+  riverpod_annotation: ^2.3.4
+
+  # Animations
+  flutter_animate: ^4.5.0
+  lottie: ^3.1.0
+
+  # Networking
+  http: ^1.2.1
+  dio: ^5.4.3
+
+  # UI helpers
+  google_fonts: ^6.2.1
+  cached_network_image: ^3.3.1
+  shimmer: ^3.0.0
+  url_launcher: ^6.2.5
+  font_awesome_flutter: ^10.7.0
+  flutter_svg: ^2.0.10+1
+  visibility_detector: ^0.4.0+2
+  share_plus: ^9.0.0
+
+  # Utils
+  flutter_web_plugins:
+    sdk: flutter
+  universal_html: ^2.2.4
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+  riverpod_generator: ^2.3.9
+  build_runner: ^2.4.8
+  mockito: ^5.4.4
+  build_verify: ^3.1.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/lottie/hero_bg.json
+    - assets/lottie/success.json
+    - assets/resume/Azim_Resume.pdf

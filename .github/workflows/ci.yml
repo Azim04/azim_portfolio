@@ -1,0 +1,57 @@
+name: CI — Analyze & Test
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+
+jobs:
+  flutter-ci:
+    name: Flutter Analyze + Test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.24.0'
+          channel: 'stable'
+          cache: true
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Verify no generated files are out of date
+        run: flutter pub run build_verify
+
+      - name: Static analysis
+        run: flutter analyze --no-pub
+
+      - name: Run widget tests
+        run: flutter test --coverage
+
+      - name: Upload coverage to Codecov (optional)
+        uses: codecov/codecov-action@v4
+        with:
+          file: coverage/lcov.info
+          fail_ci_if_error: false
+        continue-on-error: true
+
+      - name: Build Flutter Web (production)
+        run: |
+          flutter build web \
+            --release \
+            --web-renderer canvaskit \
+            --dart-define=FLUTTER_WEB_CANVASKIT_URL=canvaskit/ \
+            --source-maps
+
+      - name: Upload web build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: web-build
+          path: build/web/
+          retention-days: 7
