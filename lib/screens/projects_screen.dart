@@ -232,25 +232,27 @@ class _ProjectCardState extends ConsumerState<_ProjectCard>
                 final angle = _flipAnimation.value * 3.14159;
                 final isFront = angle < 1.5708;
 
-                return Transform(
-                  transform: Matrix4.identity()
-                    ..setEntry(3, 2, 0.001)
-                    ..rotateY(angle),
-                  alignment: Alignment.center,
-                  child: isFront
-                      ? _CardFront(
-                          project: project,
-                          isDark: ref.watch(screenProvider).isDark,
-                          repoMeta: repoMeta,
-                        )
-                      : Transform(
-                          transform: Matrix4.identity()..rotateY(3.14159),
-                          alignment: Alignment.center,
-                          child: _CardBack(
+                return IntrinsicHeight(
+                  child: Transform(
+                    transform: Matrix4.identity()
+                      ..setEntry(3, 2, 0.001)
+                      ..rotateY(angle),
+                    alignment: Alignment.center,
+                    child: isFront
+                        ? _CardFront(
                             project: project,
                             isDark: ref.watch(screenProvider).isDark,
+                            repoMeta: repoMeta,
+                          )
+                        : Transform(
+                            transform: Matrix4.identity()..rotateY(3.14159),
+                            alignment: Alignment.center,
+                            child: _CardBack(
+                              project: project,
+                              isDark: ref.watch(screenProvider).isDark,
+                            ),
                           ),
-                        ),
+                  ),
                 );
               },
             ),
@@ -402,13 +404,13 @@ class _CardFrontState extends State<_CardFront> {
               // Action row
               Row(
                 children: [
-                  _IconLink(
-                    icon: Icons.code_rounded,
-                    label: 'GitHub',
-                    url:
-                        widget.project.githubUrl ?? 'https://github.com/Azim04',
-                    isDark: widget.isDark,
-                  ),
+                  // _IconLink(
+                  //   icon: Icons.code_rounded,
+                  //   label: 'GitHub',
+                  //   url:
+                  //       widget.project.githubUrl ?? 'https://github.com/Azim04',
+                  //   isDark: widget.isDark,
+                  // ),
                   if (widget.project.demoUrl != null) ...[
                     const SizedBox(width: 12),
                     _IconLink(

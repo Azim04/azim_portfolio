@@ -5,6 +5,7 @@
 // swipe gestures feel native — critical for the "mobile app" UX target.
 // Bottom nav indicator animates with AnimatedAlign for smooth slide.
 
+import 'package:azim_portfolio/utils/print_log.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -83,7 +84,7 @@ class _MainShellState extends ConsumerState<MainShell> {
   @override
   Widget build(BuildContext context) {
     final navIndex = ref.watch(screenProvider).currentIndex;
-    print('Nav Index : $navIndex');
+    Print.greenLog('Nav Index : $navIndex');
     final isDark = ref.watch(screenProvider).isDark;
 
     return Scaffold(
@@ -93,7 +94,7 @@ class _MainShellState extends ConsumerState<MainShell> {
         controller: _pageController,
         onPageChanged: (index) {
           if (_isProgrammaticScroll) return;
-          print('Page Changed Index : $index');
+          Print.greenLog('Page Changed Index : $index');
 
           ref.read(screenProvider).setIndex(index);
         },
@@ -115,8 +116,8 @@ class _MainShellState extends ConsumerState<MainShell> {
             delay: 400.ms,
             curve: Curves.easeOutBack,
           ),
-      floatingActionButton: _ResumeFAB(),
-      floatingActionButtonLocation: FloatingActionButtonLocation.miniStartFloat,
+      // floatingActionButton: _ResumeFAB(),
+      // floatingActionButtonLocation: FloatingActionButtonLocation.miniStartFloat,
     );
   }
 }
@@ -256,58 +257,58 @@ class _NavItem {
 
 // ── Resume FAB ────────────────────────────────────────────────────
 
-class _ResumeFAB extends ConsumerStatefulWidget {
-  @override
-  ConsumerState<_ResumeFAB> createState() => _ResumeFABState();
-}
+// class _ResumeFAB extends ConsumerStatefulWidget {
+//   @override
+//   ConsumerState<_ResumeFAB> createState() => _ResumeFABState();
+// }
 
-class _ResumeFABState extends ConsumerState<_ResumeFAB> {
-  bool _downloaded = false;
+// class _ResumeFABState extends ConsumerState<_ResumeFAB> {
+//   bool _downloaded = false;
 
-  void _handleTap() {
-    // In production: trigger JS download via dart:html
-    // or open URL to the hosted PDF
-    setState(() => _downloaded = true);
-    Future.delayed(const Duration(seconds: 2), () {
-      if (mounted) setState(() => _downloaded = false);
-    });
-  }
+//   void _handleTap() {
+//     // In production: trigger JS download via dart:html
+//     // or open URL to the hosted PDF
+//     setState(() => _downloaded = true);
+//     Future.delayed(const Duration(seconds: 2), () {
+//       if (mounted) setState(() => _downloaded = false);
+//     });
+//   }
 
-  @override
-  Widget build(BuildContext context) {
-    return AnimatedContainer(
-      duration: const Duration(milliseconds: 300),
-      curve: Curves.easeInOutBack,
-      child: FloatingActionButton.extended(
-        heroTag: 'resume-fab',
-        onPressed: _handleTap,
-        backgroundColor: _downloaded ? AppColors.success : AppColors.primary,
-        elevation: 8,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
-        ),
-        icon: AnimatedSwitcher(
-          duration: const Duration(milliseconds: 250),
-          child: Icon(
-            _downloaded ? Icons.check_rounded : Icons.download_rounded,
-            key: ValueKey(_downloaded),
-            color: Colors.white,
-            size: 18,
-          ),
-        ),
-        label: AnimatedSwitcher(
-          duration: const Duration(milliseconds: 250),
-          child: Text(
-            _downloaded ? 'Saved!' : 'Resume',
-            key: ValueKey(_downloaded),
-            style: const TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.w700,
-              fontSize: 13,
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return AnimatedContainer(
+//       duration: const Duration(milliseconds: 300),
+//       curve: Curves.easeInOutBack,
+//       child: FloatingActionButton.extended(
+//         heroTag: 'resume-fab',
+//         onPressed: _handleTap,
+//         backgroundColor: _downloaded ? AppColors.success : AppColors.primary,
+//         elevation: 8,
+//         shape: RoundedRectangleBorder(
+//           borderRadius: BorderRadius.circular(20),
+//         ),
+//         icon: AnimatedSwitcher(
+//           duration: const Duration(milliseconds: 250),
+//           child: Icon(
+//             _downloaded ? Icons.check_rounded : Icons.download_rounded,
+//             key: ValueKey(_downloaded),
+//             color: Colors.white,
+//             size: 18,
+//           ),
+//         ),
+//         label: AnimatedSwitcher(
+//           duration: const Duration(milliseconds: 250),
+//           child: Text(
+//             _downloaded ? 'Saved!' : 'Resume',
+//             key: ValueKey(_downloaded),
+//             style: const TextStyle(
+//               color: Colors.white,
+//               fontWeight: FontWeight.w700,
+//               fontSize: 13,
+//             ),
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }

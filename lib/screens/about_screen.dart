@@ -188,7 +188,7 @@ class _InfoChip extends StatelessWidget {
         color: accent
             ? AppColors.success.withOpacity(0.1)
             : (isDark
-                ? AppColors.glassBorder.withOpacity(0.5)
+                ? AppColors.glassBorder.withOpacity(0.25)
                 : Colors.grey.shade100),
         borderRadius: BorderRadius.circular(10),
         border: Border.all(

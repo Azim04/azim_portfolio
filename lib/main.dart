@@ -69,8 +69,6 @@ class PortfolioApp extends ConsumerWidget {
         // Web-specific: update <title> and meta description
         // (Flutter web renders into a <canvas>; SEO meta is in index.html)
         builder: (context, child) {
-          // Enforce max width for desktop — keeps it feeling mobile
-          // even on wide viewports by centring a constrained column
           return Center(
             child: ConstrainedBox(
               constraints: const BoxConstraints(maxWidth: 480),

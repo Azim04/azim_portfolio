@@ -17,8 +17,7 @@ import '../providers/app_providers.dart';
 import '../theme/colors.dart';
 import '../widgets/section_header.dart';
 
-// ── Replace with your Formspree form ID (free tier works) ─────────
-const _kFormspreeId = 'YOUR_FORMSPREE_FORM_ID';
+const _kFormspreeId = 'xaqdalrz';
 
 class ContactScreen extends ConsumerStatefulWidget {
   const ContactScreen({super.key});

@@ -1,3 +1,4 @@
+import 'package:azim_portfolio/utils/print_log.dart';
 import 'package:flutter/material.dart';
 import '../models/github_repo.dart';
 import '../services/github_service.dart';
@@ -20,7 +21,7 @@ class ScreenProvider extends ChangeNotifier {
   int currentIndex = 0;
 
   void setIndex(int index) {
-    print('Setting Index : $index');
+    Print.greenLog('Setting Index : $index');
     currentIndex = index;
     notifyListeners();
   }
